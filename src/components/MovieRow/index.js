@@ -1,15 +1,20 @@
 import React from 'react';
 import './index.css';
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default ({ title, items }) => {
     console.log(items.results)
     return (
-        <div>
+        <div className="movieRow">
             <h2>{title}</h2>
             <div className="movieRow--listarea">
-                {items.results.length > 0 && items.results.map((item, key) => (
-                    <img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} />
-                ))}
+                <div className="movieRow--list">
+                    {items.results.length > 0 && items.results.map((item, key) => (
+                        <div key={key} className="movieRow--item">
+                            <img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.original_title} />
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     )
