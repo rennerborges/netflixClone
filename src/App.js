@@ -10,6 +10,7 @@ function App() {
 
   const [movieList, setMovieList] = useState([]);
   const [featureData, setFeatureData] = useState(null);
+  const [blackHeader, setBlackHeader] = useState(false);
 
   useEffect(() => {
     const loadAll = async () => {
@@ -22,17 +23,27 @@ function App() {
       console.log('chosen', chosen)
       const chosenInfo = await Tmdb.getMovieInfo(chosen.id, 'tv');
       setFeatureData(chosenInfo);
-
-
     }
 
     loadAll();
+  }, []);
+
+  useEffect(() => {
+    const scrollListener = () => {
+      setBlackHeader(window.scrollY > 30);
+    }
+
+    window.addEventListener('scroll', scrollListener);
+
+    return () => {
+      window.removeEventListener('scroll', scrollListener);
+    }
   }, [])
 
   return (
     <div className="page">
 
-      <Header />
+      <Header black={blackHeader} />
 
       {featureData &&
         <FeaturedMovie item={featureData} />
