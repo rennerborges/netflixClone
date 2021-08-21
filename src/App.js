@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import './App.css'
 import Tmdb from './Tmdb';
+
 import MovieRow from './components/MovieRow';
 import FeaturedMovie from './components/FeaturedMovie';
+import Header from './components/Header';
 
 function App() {
 
@@ -14,13 +16,13 @@ function App() {
       const list = await Tmdb.getHomeList();
       setMovieList(list);
 
-      const originals =  list.find(i=>i.slug === 'originals');
-      const randomChosen = Math.floor(Math.random() * originals.items.results.length -1);
+      const originals = list.find(i => i.slug === 'originals');
+      const randomChosen = Math.floor(Math.random() * originals.items.results.length - 1);
       const chosen = originals.items.results[randomChosen];
       console.log('chosen', chosen)
       const chosenInfo = await Tmdb.getMovieInfo(chosen.id, 'tv');
       setFeatureData(chosenInfo);
-    
+
 
     }
 
@@ -29,8 +31,11 @@ function App() {
 
   return (
     <div className="page">
+
+      <Header />
+
       {featureData &&
-        <FeaturedMovie item={featureData}/>
+        <FeaturedMovie item={featureData} />
       }
 
       <section className="lists">
