@@ -59,6 +59,12 @@ function App() {
         ))}
       </section>
 
+      <footer>
+        Feito com <span role="img" aria-label="coração">❤️</span> por Renner Borges <br />
+        Direitos de imagem para Netflix <br />
+        Dados pegos pelo site Themoviedb.org
+      </footer>
+
     </div>
   );
 }
