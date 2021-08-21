@@ -17,7 +17,11 @@ function App() {
       const originals =  list.find(i=>i.slug === 'originals');
       const randomChosen = Math.floor(Math.random() * originals.items.results.length -1);
       const chosen = originals.items.results[randomChosen];
-      console.log('chosen',chosen);
+      console.log('chosen', chosen)
+      const chosenInfo = await Tmdb.getMovieInfo(chosen.id, 'tv');
+      setFeatureData(chosenInfo);
+    
+
     }
 
     loadAll();
