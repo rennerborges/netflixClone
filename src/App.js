@@ -11,6 +11,7 @@ function App() {
   const [movieList, setMovieList] = useState([]);
   const [featureData, setFeatureData] = useState(null);
   const [blackHeader, setBlackHeader] = useState(false);
+  const [preloader, setPreloader] = useState(true);
 
   useEffect(() => {
     const loadAll = async () => {
@@ -23,6 +24,7 @@ function App() {
       console.log('chosen', chosen)
       const chosenInfo = await Tmdb.getMovieInfo(chosen.id, 'tv');
       setFeatureData(chosenInfo);
+      setPreloader(false);
     }
 
     loadAll();
@@ -39,6 +41,14 @@ function App() {
       window.removeEventListener('scroll', scrollListener);
     }
   }, [])
+
+  if (preloader) {
+    return (
+      <section className="loading">
+        <img src="https://i.pinimg.com/originals/9a/02/aa/9a02aac51ed499e01518ac73dd954eb1.gif" alt="Carregando" />
+      </section>
+    );
+  }
 
   return (
     <div className="page">
